@@ -1,0 +1,15 @@
+{
+  "name": "master-slave_replication",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:master:config": "cat ./master/init.sql | docker exec -i mysql-m mysql -u marcus -pmarcus",
+    "db:slave1:config": "cat ./slave1/init.sql | docker exec -i mysql-s1 mysql -u marcus -pmarcus",
+    "db:slave2:config": "cat ./slave2/init.sql | docker exec -i mysql-s2 mysql -u marcus -pmarcus",
+    "db:create-table": "cat ./startup.sql | docker exec -i mysql-m mysql -u marcus -pmarcus"
+  },
+  "author": "",
+  "license": "ISC"
+}
