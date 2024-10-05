@@ -5,11 +5,24 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "db:master:config": "cat ./master/init.sql | docker exec -i mysql-m mysql -u marcus -pmarcus",
-    "db:slave1:config": "cat ./slave1/init.sql | docker exec -i mysql-s1 mysql -u marcus -pmarcus",
-    "db:slave2:config": "cat ./slave2/init.sql | docker exec -i mysql-s2 mysql -u marcus -pmarcus",
-    "db:create-table": "cat ./startup.sql | docker exec -i mysql-m mysql -u marcus -pmarcus"
+    "db:master:config": "cat ./sql/master/init.sql | docker exec -i mysql_master mysql -u root -proot",
+    "db:master:dump": "docker exec -i mysql_master mysqldump -u root -proot store > ./dump/mydb.sql",
+    "db:slave1:create": "cat ./createdb.sql | docker exec -i mysql_s1 mysql -u root -proot",
+    "db:slave2:create": "cat ./createdb.sql | docker exec -i mysql_s2 mysql -u root -proot",
+    "db:slave1:dump-restore": "docker exec -i mysql_s1 mysql -u root -proot store < ./dump/mydb.sql",
+    "db:slave2:dump-restore": "docker exec -i mysql_s2 mysql -u root -proot store < ./dump/mydb.sql",
+    "db:slave1:config": "cat ./sql/replica/init.sql | docker exec -i mysql_s1 mysql -u root -proot",
+    "db:slave2:config": "cat ./sql/replica/init.sql | docker exec -i mysql_s2 mysql -u root -proot",
+    "db:slave1:stop": "cat ./sql/replica/stop.sql | docker exec -i mysql_s1 mysql -u root -proot",
+    "db:slave2:stop": "cat ./sql/replica/stop.sql | docker exec -i mysql_s2 mysql -u root -proot",
+    "db:create-table": "cat ./startup.sql | docker exec -i mysql_master mysql -u root -proot"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^9.0.3",
+    "dotenv": "^16.4.5",
+    "faker": "^6.6.6",
+    "mysql2": "^3.11.3"
+  }
 }

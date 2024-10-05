@@ -10,7 +10,6 @@ CREATE TABLE phones (
     amount INT NOT NULL
 );
   
-
 INSERT INTO phones (name, price, amount) VALUES 
 ('Iphone 12', 700, 20),
 ('Samsung Galaxy S21', 800, 15),
