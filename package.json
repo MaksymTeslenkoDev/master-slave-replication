@@ -15,7 +15,9 @@
     "db:slave2:config": "cat ./sql/replica/init.sql | docker exec -i mysql_s2 mysql -u root -proot",
     "db:slave1:stop": "cat ./sql/replica/stop.sql | docker exec -i mysql_s1 mysql -u root -proot",
     "db:slave2:stop": "cat ./sql/replica/stop.sql | docker exec -i mysql_s2 mysql -u root -proot",
-    "db:create-table": "cat ./startup.sql | docker exec -i mysql_master mysql -u root -proot"
+    "db:create-table": "cat ./startup.sql | docker exec -i mysql_master mysql -u root -proot",
+    "db:slave1:alter":"cat ./sql/replica/alter-table.sql | docker exec -i mysql_s1 mysql -u root -proot",
+    "db:slave2:alter":"cat ./sql/replica/alter-table.sql | docker exec -i mysql_s2 mysql -u root -proot"
   },
   "author": "",
   "license": "ISC",

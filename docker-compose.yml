@@ -1,6 +1,6 @@
 services:
   mysql_master:
-    image: mysql:8.4
+    image: mysql:8.0
     container_name: mysql_master
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -14,10 +14,9 @@ services:
       - ./configs/master.cnf:/etc/mysql/conf.d/my.cnf
     networks:
       - mysql_replication
-    command: ["/bin/bash", "-c", "mkdir -p /var/log/mysql && chown mysql:mysql /var/log/mysql && exec mysqld"]
   
   mysql-s1:
-    image: mysql:8.4
+    image: mysql:8.0
     container_name: mysql_s1
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -33,10 +32,9 @@ services:
       - ./configs/slave1.cnf:/etc/mysql/conf.d/my.cnf
     networks:
       - mysql_replication
-    command: ["/bin/bash", "-c", "mkdir -p /var/log/mysql && chown mysql:mysql /var/log/mysql && exec mysqld"]
 
   mysql-s2:
-    image: mysql:8.4
+    image: mysql:8.0
     container_name: mysql_s2
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -52,7 +50,7 @@ services:
       - ./configs/slave2.cnf:/etc/mysql/conf.d/my.cnf
     networks:
       - mysql_replication
-    command: ["/bin/bash", "-c", "mkdir -p /var/log/mysql && chown mysql:mysql /var/log/mysql && exec mysqld"]
+    # command: ["/bin/bash", "-c", "mkdir -p /var/log/mysql && chown mysql:mysql /var/log/mysql && exec mysqld"]
   
 volumes:
   mysql_master_data:
